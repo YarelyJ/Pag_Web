@@ -1,0 +1,90 @@
+body {
+    font-family:'Times New Roman';
+    margin: 0;
+    padding: 0;
+    background-color: #638ddb;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color:#fff;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 0;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    margin: 20px auto;
+    width: 95%;
+    border-radius: 10px;
+}
+section {
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="datetime-local"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+button{
+    width: 10%;
+    background-color: #4aaad6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+button:hover{
+    background-color: #1b2580;
+}
+footer{
+    display: flex;
+    align-items: center;
+    background-color: #638ddb;
+    padding: 5px;
+}
+/* Estilos generales para las tareas */
+.tarea {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.rojo {
+    background-color: #ff0000; 
+}
+
+.naranja {
+    background-color: #ff6600; 
+}
+
+.verde {
+    background-color: #33cc33; 
+}
+
+button {
+    margin-left: 10px;
+}
