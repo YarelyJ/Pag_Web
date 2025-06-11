@@ -1,43 +1,46 @@
 * {
-    font-family:'Times New Roman';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    background-color: #f0f0f0; 
+    font-family: Arial, sans-serif; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    margin: 0;
+}
+
+/* Contenedor principal */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .cont {
-    background-color: white;
+    background-color: white; 
     padding: 50px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 300px;
-}
-
-h1 {
-    margin-bottom: 15px;
-    font-size: 24px;
+    border-radius: 10px; 
+    text-align: center; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor del recuadro */
 }
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    background-color: #4aaad6;
+    background-color: #4aaad6; 
     color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    border: none;
+    border-radius: 5px; 
+    font-size: 16px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; /* Animación suave de cambio de color */
 }
 
 button:hover {
-    background-color: #1b2580;
+    background-color: #1b2580; 
 }
