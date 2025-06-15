@@ -1,38 +1,96 @@
--- Tabla PEDIDOS (1FN)
-CREATE TABLE PEDIDOS_1FN (
-    ID_Pedido INT PRIMARY KEY,
-    Fecha_Pedido DATE,
-    ID_Cliente VARCHAR(10),
-    Nombre_Cliente VARCHAR(100),
-    Direccion_Cliente VARCHAR(150),
-    Ciudad_Cliente VARCHAR(100)
+-- Crear la base de datos
+CREATE DATABASE Ferreteria;
+GO
+USE Ferreteria;
+GO
+
+-- Crear las tablas
+CREATE TABLE Clientes (
+    ClienteID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(100),
+    Telefono NVARCHAR(15),
+    Email NVARCHAR(100)
 );
 
--- Tabla DETALLES_PEDIDO (1FN)
-CREATE TABLE DETALLES_PEDIDO_1FN (
-    ID_Detalle INT PRIMARY KEY IDENTITY(1,1),
-    ID_Pedido INT,
-    Producto VARCHAR(100),
+CREATE TABLE Productos (
+    ProductoID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(100),
+    Precio DECIMAL(10, 2),
+    Stock INT
+);
+
+CREATE TABLE Ventas (
+    VentaID INT PRIMARY KEY IDENTITY(1,1),
+    ClienteID INT,
+    Fecha DATETIME,
+    Total DECIMAL(10, 2),
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+
+CREATE TABLE DetallesVentas (
+    DetalleID INT PRIMARY KEY IDENTITY(1,1),
+    VentaID INT,
+    ProductoID INT,
     Cantidad INT,
-    Precio_Unitario DECIMAL(10,2),
-    FOREIGN KEY (ID_Pedido) REFERENCES PEDIDOS_1FN(ID_Pedido)
+    PrecioUnitario DECIMAL(10, 2),
+    FOREIGN KEY (VentaID) REFERENCES Ventas(VentaID),
+    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID)
 );
 
--- Inserts PEDIDOS
-INSERT INTO PEDIDOS_1FN VALUES
-(1001, '2023-05-10', 'C101', 'Juan Pérez', 'Av. Principal 123', 'Lima'),
-(1002, '2023-05-11', 'C102', 'María Gómez', 'Calle Secundaria 456', 'Arequipa'),
-(1003, '2023-05-12', 'C101', 'Juan Pérez', 'Av. Principal 123', 'Lima');
+-- Insertar datos de ejemplo
+INSERT INTO Clientes (Nombre, Telefono, Email) VALUES  
+('Juan Pérez', '555-1234', 'juan@example.com'), 
+('María López', '555-5678', 'maria@example.com');
 
--- Inserts DETALLES
-INSERT INTO DETALLES_PEDIDO_1FN (ID_Pedido, Producto, Cantidad, Precio_Unitario) VALUES
-(1001, 'Laptop1', 1, 1200),
-(1001, 'mouse', 2, 25),
-(1001, 'Teclado1', 1, 50),
-(1002, 'Monitor', 2, 200),
-(1003, 'Impresora', 1, 300),
-(1003, 'cartucho', 3, 40);
+INSERT INTO Productos (Nombre, Precio, Stock) VALUES  
+('Martillo', 10.00, 100), 
+('Destornillador', 5.00, 200);
 
--- Ver tablas (1FN)
-SELECT * FROM PEDIDOS_1FN;
-SELECT * FROM DETALLES_PEDIDO_1FN;
+INSERT INTO Ventas (ClienteID, Fecha, Total) VALUES  
+(1, GETDATE(), 30.00), 
+(2, GETDATE(), 15.00);
+
+INSERT INTO DetallesVentas (VentaID, ProductoID, Cantidad, PrecioUnitario) VALUES  
+(1, 1, 2, 10.00), 
+(1, 2, 2, 5.00), 
+(2, 2, 3, 5.00);
+
+-- Consultas de reporte
+-- a) Reporte por Cliente
+SELECT  
+    c.Nombre, 
+    COUNT(v.VentaID) AS TotalVentas,  
+    SUM(v.Total) AS TotalGastado 
+FROM  
+    Clientes c 
+JOIN  
+    Ventas v ON c.ClienteID = v.ClienteID 
+GROUP BY  
+    c.Nombre;
+
+-- b) Reporte por Ventas
+SELECT  
+    v.VentaID, 
+    c.Nombre AS Cliente, 
+    v.Fecha, 
+    v.Total 
+FROM  
+    Ventas v 
+JOIN  
+    Clientes c ON v.ClienteID = c.ClienteID 
+ORDER BY  
+    v.Fecha DESC;
+
+-- c) Reporte por Productos
+SELECT  
+    p.Nombre AS Producto, 
+    SUM(dv.Cantidad) AS TotalVendidos, 
+    SUM(dv.Cantidad * dv.PrecioUnitario) AS TotalIngresos 
+FROM  
+    DetallesVentas dv 
+JOIN  
+    Productos p ON dv.ProductoID = p.ProductoID 
+GROUP BY  
+    p.Nombre 
+ORDER BY  
+    TotalVendidos DESC;
