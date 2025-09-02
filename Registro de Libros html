@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro de Libros</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div>
+        <h1>Registro de Libros</h1>
+        <p class="subtitle">Formulario para registrar y listar información de libros</p>
+      </div>
+      <div class="meta">
+        <span>Administrador</span>
+      </div>
+    </header>
+
+    <section class="card form-card">
+      <form id="book-form" class="form" action="#" method="post" novalidate>
+        <div class="row">
+          <div class="field col-6">
+            <label for="title">Título</label>
+            <input id="title" name="title" type="text" placeholder="Título del libro" required>
+          </div>
+
+          <div class="field col-6">
+            <label for="author">Autor</label>
+            <input id="author" name="author" type="text" placeholder="Nombre del autor" required>
+          </div>
+
+          <div class="field col-4">
+            <label for="genre">Género</label>
+            <input id="genre" name="genre" type="text" placeholder="Ej. Novela, Ciencia, Infantil">
+          </div>
+
+          <div class="field col-3">
+            <label for="year">Año</label>
+            <input id="year" name="year" type="number" min="0" placeholder="2025">
+          </div>
+
+          <div class="field col-5">
+            <label for="isbn">ISBN</label>
+            <input id="isbn" name="isbn" type="text" placeholder="ISBN (opcional)">
+          </div>
+
+          <div class="field col-12">
+            <label for="description">Descripción</label>
+            <textarea id="description" name="description" rows="3" placeholder="Breve descripción del libro"></textarea>
+          </div>
+
+          <div class="actions col-12">
+            <button type="submit" class="btn primary">Agregar libro</button>
+            <button type="reset" class="btn ghost">Limpiar</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="card list-card">
+      <h2>Lista de libros</h2>
+      <p class="muted">(Aquí aparecerán los libros registrados — requiere JavaScript para la funcionalidad completa)</p>
+
+      <div class="table-wrap">
+        <table id="books-table" class="books-table">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Género</th>
+              <th>Año</th>
+              <th>ISBN</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filas de ejemplo estáticas (puedes eliminarlas) -->
+            <tr>
+              <td>Ejemplo: El Principito</td>
+              <td>Antoine de Saint-Exupéry</td>
+              <td>Ficción</td>
+              <td>1943</td>
+              <td>978-1234567890</td>
+              <td>
+                <button class="btn small">Editar</button>
+                <button class="btn small danger">Eliminar</button>
+              </td>
+            </tr>
+            <!-- Fin ejemplo -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Registro de Libros — Sistema de demostración</p>
+    </footer>
+  </div>
+</body>
+</html>
