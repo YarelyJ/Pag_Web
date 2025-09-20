@@ -3,6 +3,7 @@ nombre:diego<br>
 &lt;script&gt;
  window.location.href = &#x27;https://www.google.com&#x27;;
 &lt;/script&gt;
+
 <hr>nombre:diego<br>
                comentarios:comentario 1<hr>nombre:juan<br>
-               comentarios:comentario 2<hr>
+               comentarios:comentario 2<hr>apellifo:galvan<br>
